@@ -1,0 +1,76 @@
+Notes:
+    ************************ Standard Template Library **********************************
+
+    important for competitive programming
+    1. containers:(data structures)
+        sequential
+        - vectors
+        - stack
+        - queue
+        - pair(not a container) - a class
+        ordered
+        - maps
+        - multimap
+        - set 
+        - multiset
+        unordered
+        - unordered maps
+        - unordered set
+
+        Nested containers
+        eg vector<vector<int>>
+    
+    2. Iterators (similar to pointers)
+        ex -begin(), end()
+        - vector<int>::iterator it;
+    
+    3. Algorithms 
+        - upper bound
+        - lower bound
+        - sort(comparator)
+        - max_element 
+        - min_element
+        - accumulate
+        - reverse
+        - count
+        - find
+        - next permuations
+        - prev_permuations
+
+    4. Functors(not needed much in cp)
+        - classes which can act as functions (towards object oriented programming)
+    
+
+***************************************************************************************************************************************
+
+NOTES:
+**************** PAIRS *************
+    pair<int, string> p;   --------- can make pair of any two data types
+    p = make_pair(2, "Dhruv")
+    or 
+    p = {2, "Dhruv"}
+    to print the values:
+    cout << p.first << p.second;
+    
+    pairs can directly be assigned 
+    pair<int, string> p1 = p  --> this is done by passing it by value (not the memory address)
+    pair<int, string> &p1 = p ---> this is done by passing it by reference (c++ references)
+    p1.first = 3 so the value of it changes in its address
+
+
+
+********************************** Iterators **********************************
+vector<int>::iterator it;
+it = v.begin(); or it = v.end();
+
+    to directly print the values of elements of the vector without using iterators
+
+    vector<int> v;
+    for(int value: v){
+        cout << value << " ";
+    }
+    vector<pair<int,int>> v1;
+    for(pair<int,int> &value: v1){   // pass by reference
+        cout << value.first << " " << value.second << endl;
+    }
+
