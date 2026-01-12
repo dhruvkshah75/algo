@@ -34,6 +34,7 @@ public:
         int longest = 1; // the ans
         // this is only O(N)
         while(it != s.end()) {
+            // the main key point is to only check this if nums[i] - 1 is not present 
             if(s.find(*it - 1) == s.end()){
                 int ctr = 0;
                 int val = *it;
@@ -59,6 +60,6 @@ int main() {
     }
     
     Solution s = Solution();
-    int ans = s.longestSequence(nums);
+    int ans = s.longestConsecutive(nums);
     cout << ans << endl;
 }
