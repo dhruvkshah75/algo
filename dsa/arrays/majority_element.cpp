@@ -13,6 +13,7 @@
     - If it **differs**, decrement the count.  
     - **Reset the candidate** when count drops to 0 (use the current element as the new candidate).  
     3. **The candidate at the end is the majority element** (guaranteed to exist).
+    Only works when the majortiy element has more than half occurrences 
 
     **Why it works**:  
     The majority element appears > n/2 times. Even if all non-majority elements "cancel out" the majority count, 
@@ -37,7 +38,7 @@ public:
         }
         return curr;
     }
-};
+}
 
 int main(){
     int n;
