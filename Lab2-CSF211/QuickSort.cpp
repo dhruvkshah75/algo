@@ -9,6 +9,11 @@ using namespace std;
     2. Smaller elements are placed to the left of and larger on right 
 
 
+    NOTE: WHAT ALTERATIONS WE CAN MAKE TO QUICK SORT 
+        When we divide the array on the basis of left and right of the pivot, we can have our custom logic there to 
+        do something in particular 
+
+
 */
 class Solution {
 public:
@@ -28,11 +33,11 @@ public:
         }
 
         // Place pivot in its correct sorted position (swap with j)
+        // if the pivot was nums[right] then we do swap(nums[i], nums[right] = pivot)
         swap(nums[left], nums[j]);
         
         // Return j, because that's where the pivot is now
         return j;
-
     }
 
 
