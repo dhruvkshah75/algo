@@ -1,0 +1,65 @@
+// Author: dks75 | https://codeforces.com/profile/dks75
+// ----------------------------------------------------
+#include<bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+#define yes cout << "YES" << endl;
+#define no cout << "NO" << endl;
+#define mod 1000000007
+#define PI 3.14159265358979323846
+#define f(i, n) for(int i=0; i<n; i++)
+#define f1(i, n) for(int i=1; i<=n; i++)
+#define all(a) (a).begin(), (a).end()
+#define fc(i, n, a) for(int i=0; i<n; i++){cin >> a[i];}
+#define ff(i, n, a, freq) for(int i=0; i<n; i++){cin >> a[i]; freq[a[i]]++;}
+
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    f(i, n){
+        cin >> a[i];
+    }
+    int m;
+    cin >> m;
+    while(m--){
+        string s;
+        cin >> s;
+        if(s.size() != n){
+            no;
+            continue;
+        }
+        unordered_map<char,int> freq2;
+        unordered_map<char, int> match;
+        unordered_map<int,int> freq1;
+        bool flag = true;
+        for(int i=0; i<n && flag; i++){
+            freq2[s[i]]++;
+            if(freq2[s[i]] == 1){
+                match[s[i]] = a[i];
+            }
+            else if(freq2[s[i]] > 1){
+                if(match[s[i]] != a[i]){
+                    no;
+                    flag = false;
+                }
+            }
+        }
+        if(flag){
+            yes;
+        }
+    }
+
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int tt;
+    cin >> tt;
+    while (tt--)
+        solve();
+}

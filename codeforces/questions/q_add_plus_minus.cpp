@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define yes cout << "YES" << endl;
+#define no cout << "NO" << endl;
+#define mod 1e9+7
+#define PI 3.14159265358979323846
+#define f(i, n) for(int i=0; i<n; i++)
+#define f1(i, n) for(int i=1; i<=n; i++)
+#define all(a) (a).begin(), (a).end()
+
+void solve(){
+    int n;
+    cin >> n;
+    string a;
+    cin >> a;
+    string ans = "";
+    int ctr = 0;
+    for(int i=0; i<n-1; i++){
+        if(a[i]=='1' && a[i+1]=='1'){
+            if(ctr%2==0){
+                ctr++;
+                ans[i] = '-';
+            }
+            else{
+                ctr++;
+                ans[i] = '+';
+            }
+        }
+        else if(a[i]=='0' && a[i+1]=='1'){
+            if()
+        }
+    }
+}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int tt;
+    cin >> tt;
+    while(tt--){
+        solve();
+    }
+}
