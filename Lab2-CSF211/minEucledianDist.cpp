@@ -3,6 +3,7 @@ using namespace std;
 
 // can we apply merge sort by breaking them into small parts 
 // MINIMUM EUCLEDIAN DISTANCE 
+// question link: https://cses.fi/problemset/task/2194
 
 class Solution{
     void merge(vector<vector<int>>&points, int left, int mid, int right, int &ans) {
