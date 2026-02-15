@@ -6,3 +6,5 @@ dsa/a.out
 
 *.exe
 *.txt
+
+*.data
