@@ -4,5 +4,5 @@ using namespace std;
 // This is NOT an issue and can be ignored.
 
 ListNode* solve(ListNode* head, int k) {
-
+    // we make group of k lists and then reverse them 
 }
