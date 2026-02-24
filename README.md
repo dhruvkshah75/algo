@@ -8,5 +8,5 @@ Personal archive of `DSA` solutions and Codeforces submissions. This includes al
 - **Lab2-CSF211**: Divide and Conquer algorithms 
 - **Lab3-CSF211**: Binary Search 
 - **Lab4-CSF211**: Lab1 - Lab3 
-- **Lab5-CSF211**: Stacks, Queues, Linked Lists and Binary Search Trees(BST)
+- **Lab5-CSF211**: Stacks, Queues and Linked Lists
 
