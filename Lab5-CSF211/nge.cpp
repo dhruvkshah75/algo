@@ -26,7 +26,7 @@ vector<int> nextGreaterElement(vector<int>&nums) {
 
 
 
-// implementation of nect greater element using Monotonic decreasing stack 
+// implementation of next greater element using Monotonic decreasing stack 
 // ========= Using MONOTONIC DECREASING STACK ========
 
 /*
