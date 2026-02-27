@@ -4,8 +4,6 @@ using namespace std;
 // question link: https://codeforces.com/contest/1526/problem/C2
 
 void solve(int n, vector<int>&potions) {
-    // we can maintain a min heap to store the min at top 
-    // it is better to drink -2, -2 drinks rather than -4 drinks 
     int no_of_drinks = n;
 
     // store the neg drinks in the min heap 
@@ -17,7 +15,6 @@ void solve(int n, vector<int>&potions) {
     long long health = 0;
 
     for(int potion: potions) {
-
         health += (long long)potion; 
         // store the negative drink 
         if(potion < 0) {
@@ -28,6 +25,8 @@ void solve(int n, vector<int>&potions) {
             // undrink the drinks untill health becomes positive 
             while(min_heap.size() > 0 && health < 0) {
                 no_of_drinks--;
+                // after undrinking the drink update the health 
+                health += abs(min_heap.top());
                 min_heap.pop();
             }
         }
