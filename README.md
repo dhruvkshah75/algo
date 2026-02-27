@@ -9,4 +9,5 @@ Personal archive of `DSA` solutions and Codeforces submissions. This includes al
 - **Lab3-CSF211**: Binary Search 
 - **Lab4-CSF211**: Lab1 - Lab3 
 - **Lab5-CSF211**: Stacks, Queues and Linked Lists
+- **Lab6-CSF211**: Priority Queues(Min and Max heaps), Binary Search Trees(BST)
 
