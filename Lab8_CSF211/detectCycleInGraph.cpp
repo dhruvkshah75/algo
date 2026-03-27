@@ -63,3 +63,40 @@ bool isCycle(vector<vector<int>> &adjL, int n) {
 
 
 // =================================== DFS ======================================================
+
+bool dfs(vector<vector<int>>&adjL, vector<bool>&visited, const pair<int,int> &node) {
+
+    auto [currNode, parent] = node;
+
+    // mark the current node as marked 
+    visited[currNode] = true;
+
+    for(int nbg: adjL[currNode]) {
+        // if we already visited the nbg of currnode and it is not the parent then cycle detected 
+        if(visited[nbg] && parent != nbg){
+            return true;
+        }
+        else if(!visited[nbg]) {
+            if(dfs(adjL, visited, {nbg, currNode}))
+                return true;
+        }
+    }
+
+    return false;
+}
+
+bool hasCycle(vector<vector<int>> &adjL, int n) {
+    // n vertices => 0 to n-1
+    vector<bool> visited(n, false);
+
+    // we call the dfs function for all the unvisited nodes as there may be multiple connected components 
+
+    // we must keep a track of parent and currentNode => 
+    for(int i = 0; i < n; i++) {
+        if(!visited[i]) {
+            if(dfs(adjL, visited, {i, -1})) return true;
+        }
+    }
+
+    return false;
+}

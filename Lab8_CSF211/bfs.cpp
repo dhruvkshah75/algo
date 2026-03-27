@@ -63,3 +63,7 @@ void bfs(vector<vector<int>> &adjL, int start, int n) {
     // Time Complexity = O(N + 2E) 
     // Inner loop runs for all the degrees of the nodes => 2E (handshaking lemma)
 }
+
+// ==============================================================
+// BFS = shortest path. Always. In any unweighted graph
+// ==============================================================
