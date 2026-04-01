@@ -26,7 +26,7 @@ private:
         int n = grid.size();
 
         queue<pair<int,int>> q;
-        
+        // push all the thieves in the queue as the starting points -
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
                 if(grid[i][j] == 1) {
