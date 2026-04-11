@@ -82,7 +82,7 @@ struct DSU {
 
 
 // ============================================================================
-//              DSU union by size 
+//                      DSU union by size 
 // ============================================================================
 /*
     Size array => default => 1 as all nodes initially have size 1 
