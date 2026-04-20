@@ -4,14 +4,20 @@ using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
 typedef unsigned int uint;
+typedef pair<int,int> pii;
+typedef tuple<ll,int,int> tlii;
 
 const int mod = 1e9+7;
+const ll inf = 1e18;
 
 #define yes cout << "YES" << endl;
 #define no cout << "NO" << endl;
+#define all(x) x.begin(), x.end()
+#define allr(x), x.rbegin(), x.rend()
 
 // question link: https://codeforces.com/problemset/problem/1245/D
-// VERY IMPORTANT Question on MST 
+
+// VERY IMPORTANT Question on MST => Virtual Node MST  
 
 struct DSU {
     vector<int> parent, size;
@@ -40,11 +46,11 @@ struct DSU {
 
 void solve(int n, vector<pair<int,int>> &city, vector<int> &c, vector<int> &k) {
 
-    // create a virtual node 0 which is connected to all the cities (virtual node indicates power station)
-    // so if a station is connected to the node 0 it means that there is a power source there 
-    // Kruskal's algorithm will decide which edge to take in mst 
+    /*  create a virtual node 0 which is connected to all the cities (virtual node indicates power station)
+        so if a station is connected to the node 0 it means that there is a power source there 
+        Kruskal's algorithm will decide which edge to take in mst */
 
-    vector<tuple<ll,int,int>> edges;
+    vector<tlii> edges;
     // edges = {wt, node1, node2} => node1 ---> node2 
 
     // first make connections with the virtual node 
@@ -66,9 +72,9 @@ void solve(int n, vector<pair<int,int>> &city, vector<int> &c, vector<int> &k) {
 
     vector<int> pBuild;
     ll minWtSum = 0;
-    vector<pair<int,int>> connections;
+    vector<pii> connections;
 
-    sort(edges.begin(), edges.end());
+    sort(all(edges));
     // sort on the basis of edge weight 
 
     for(auto &[wt, u, v]: edges) {
@@ -122,3 +128,4 @@ int main() {
 
     solve(n, city, costPower, costWire);
 }
+
