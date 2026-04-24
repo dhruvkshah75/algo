@@ -56,3 +56,80 @@ int rob2(vector<int> &nums) {
 
     return dp[n-1];
 }
+
+
+// =======================================================================================
+//                      Important Space Optimised Code => HOUSE ROBBER 1
+// =======================================================================================
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        if(n == 1) 
+            return nums[0];
+         
+        // dp[i] = amount robbed till ith house 
+        // dp0 = dp[i-2] and dp1 = dp[i-1]
+
+        int dp0 = nums[0];
+        int dp1 = max(dp0, nums[1]); 
+
+        
+        for(int i = 2; i < n; i++) {
+            // robber has 2 choices => rob the ith house or not 
+            int val = max(dp1, dp0 + nums[i]);
+
+            dp0 = dp1;
+            dp1 = val;
+        }
+
+        return dp1;
+    }
+};
+
+// =========================================================================================================
+//                          SPACE OPTIMISED SOLUTION FOR HOUSE ROBBER 2
+// =========================================================================================================
+
+class HouseRobber2 {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        // dp[i] = max amount robbed till reaching this place 
+        if(n == 1) return nums[0];
+        else if(n == 2) return max(nums[0], nums[1]);
+
+        // dp1 = dp[i-1] and dp0 = dp[i-2]
+
+        // CASE1: robbing house[1] to house[n-1]
+        int dp0 = nums[0];
+        int dp1 = max(dp0, nums[1]);
+
+        // if house[0] is robbed then house[n-1] cannot be robbed 
+        for(int i = 2; i < n-1; i++) {
+            int best = max(dp1, dp0 + nums[i]);
+
+            dp0 = dp1;
+            dp1 = best;
+        }
+        int robM1 = dp1;
+
+        // CASE2: robbing house[2] to house[n]=> overwrite the existing dp
+        dp0 = nums[1];
+        dp1 = max(dp0, nums[2]);
+
+        for(int i = 3; i < n; i++) {
+            int best = max(dp1, dp0 + nums[i]);
+
+            dp0 = dp1;
+            dp1 = best;
+        }
+        int robM2 = dp1;
+        
+        // return the best way to rob => houses [0:n-2] or [1:n-1]
+        return max(robM1, robM2);
+    }
+};

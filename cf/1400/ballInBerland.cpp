@@ -36,9 +36,6 @@ void solve(int a, int b, int k, vector<int> &boys, vector<int> &girls) {
 
     for(int i = 1; i <= b; i++) 
         invalid_pairs += nCk(degG[i]);
-
-    cerr << "total: " << total_pairs << endl;
-    cerr << "invalid: " << invalid_pairs << endl;
  
     cout << total_pairs - invalid_pairs << endl;
 }
