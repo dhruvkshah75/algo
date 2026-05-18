@@ -8,3 +8,13 @@ dsa/a.out
 *.txt
 
 *.data
+
+
+.vscode/
+*.exe
+*.out
+*.o
+*.class
+node_modules/
+build/
+dist/
