@@ -45,7 +45,7 @@ typedef long long ll;
 //                                                     Top Down Approach (Memoization) dp        
 // ================================================================================================================================================
 
-class Solution {
+class RecursiveSolution {
 private:    
     const static int N = 5e3 + 1;
     
@@ -70,8 +70,7 @@ private:
             take = f(x - 1, target - arr[x], arr);
         }
 
-        dp[x][target] = ((take || not_take) ? 1 : 0);
-        return take || not_take;
+        return dp[x][target] = (take || not_take);
     }
 
 public:
@@ -84,24 +83,53 @@ public:
     }
 };
 
+// time complexity = O(N * target)
+// space complexity = O(N * target) + O(N)  => O(N) is the stack space 
 
 
 // =========================================================================================================================================================
 //                                          Bottom up Approach (Tabulation) dp
 // =========================================================================================================================================================
 
+/* From Memoization => tabulation 
+   1. Start from the base cases 
+   2. form the nested loops from the states of the recurrence in memoization 
+   3. Copy the recurrence relation from the memoization and convert to dp instead of recursive calls 
+*/
 
+class Solution {
+public:
+    bool isSubsetSum(vector<int> &arr, int target) {
+        int n = arr.size();
 
+        vector<vector<bool>> dp(n, vector<bool>(target + 1, false));
 
+        // start from the base cases 
+        // target = 0 => then index value can be any thing 
+        for(int i = 0; i < n; i++) 
+            dp[i][0] = true;
+            
+        // index = 0 => target = arr[0]
+        dp[0][arr[0]] = true;
 
+        // now starting from indexes 1 to n - 1
+        for(int i = 1; i < n; i++) {
+            for(int sum = 1; sum <= target; sum++) {
+                bool not_take = dp[i - 1][sum];
+                
+                bool take = false;
+                if(sum >= arr[i]) take = dp[i - 1][sum - arr[i]];
 
+                dp[i][sum] = (take || not_take);
+            }
+        }
 
+        return dp[n - 1][target];
+    }
+};
 
-
-
-
-
-
+// Space Optimisation of the above problem => each calculation only depends on the previous element so we can space optimise this solution 
+// Refer to the space optimisation of the question below 
 
 /* 
     =========================================================================================================================================================
@@ -111,6 +139,8 @@ public:
     =========================================================================================================================================================
 
         Anathor variant of the question => subset sum equals target 
+
+        All three solutions are provided => Memoization, tabulation, space optimised tabulation 
 
         question link: https://leetcode.com/problems/partition-equal-subset-sum/description/
 
@@ -128,7 +158,7 @@ public:
 
 #define all(x) x.begin(), x.end()
 
-class Solution {
+class RecursiveSolution {
 private: 
     int total;
     const static int N = 2e4 + 1;
@@ -153,8 +183,7 @@ private:
         bool take = false;
         if(target >= nums[x]) take = f(x - 1, target - nums[x], nums);
 
-        dp[x][target] = ((take || not_take) ? 1 : 0);
-        return take || not_take;
+        return dp[x][target] = (take || not_take);
     }
 
 public:
@@ -170,5 +199,93 @@ public:
         int target = total / 2;
 
         return f(n - 1, target, nums);
+    }
+};
+
+// ========================================================================================================================================================
+//                                                  Bottom Up Approach (Tabulation) dp 
+// ========================================================================================================================================================
+
+#define all(x) x.begin(), x.end()
+
+class Solution {
+public: 
+    bool canPartition(vector<int>& nums) {
+        int n = nums.size();
+
+        int total = accumulate(all(nums), 0);
+
+        if(total & 1)  // total should be divisible by 2 
+            return false;
+
+        // for two subsets to have the same sum => x + x = total =>> target = total / 2;
+        int target = total / 2;
+
+        vector<vector<bool>> dp(n, vector<bool>(total + 1, false));
+
+        // starting with the base cases 
+        // target = 0 => then true for all indices 
+        for(int i = 0; i < n; i++) 
+            dp[i][0] = true;
+
+        // considering the base case 
+        dp[0][nums[0]] = true;
+
+        for(int i = 1; i < n; i++) {
+            for(int sum = 1; sum <= target; sum++) {
+                bool take = dp[i - 1][sum];
+
+                bool not_take = false;
+                if(sum >= nums[i]) not_take = dp[i - 1][sum - nums[i]];
+
+                dp[i][sum] = (take || not_take);
+            }
+        }
+
+        return dp[n - 1][target];
+    }
+};
+
+// ===================================================== Space Optimised Solution ==========================================================================
+
+#define all(x) x.begin(), x.end()
+
+class SpaceOptimisedSolution {
+public:
+    bool canPartition(vector<int> &nums) {
+        int n = nums.size();
+
+        int total = accumulate(all(nums), 0);
+
+        if(total & 1)  // total should be divisible by 2 
+            return false;
+
+        // for two subsets to have the same sum => x + x = total =>> target = total / 2;
+        int target = total / 2;
+
+        // here the dp vector stores all the sum values for the previous index 
+
+        vector<bool> dp(total + 1, false), temp(total + 1);
+
+        // base case: target = 0 => then true for all indices => must update this base case in the loops 
+        dp[0] = dp[nums[0]] = true;
+
+        for(int i = 1; i < n; i++) {
+            dp[0] = true;   // base case => target = 0 
+
+            for(int sum = 1; sum <= target; sum++) {
+                bool take = dp[sum];
+
+                bool not_take = false;
+                if(sum >= nums[i]) not_take = dp[sum - nums[i]];
+
+                temp[sum] = (take || not_take);
+            }
+
+            dp = temp;
+        }
+
+        // after all the for loop iteration dp contains the bools of all the sums till the index n-1
+        return dp[target];
     }
 };
