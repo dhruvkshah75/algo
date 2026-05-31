@@ -39,7 +39,7 @@ typedef long long ll;
 int f(int x, int sum, vector<int> &arr) {
     if(x == 0) {
         // we can take and not take the arr[0] => both cases are valid 
-        if(sum == 0 && arr[0]) return 2;
+        if(sum == 0 && arr[0] == 0) return 2;
 
         // 1 way is to not take the arr[0] != 0 or the sum = arr[0] then take the element 
         if(sum == 0 || sum == arr[0]) return 1;
