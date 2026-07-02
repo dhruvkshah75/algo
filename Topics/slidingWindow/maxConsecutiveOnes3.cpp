@@ -75,3 +75,35 @@ public:
         return maxLen;
     }
 };
+
+
+// ========================================== optimised solution ===================================================
+
+// Time Complexity = O(N) => in only 1 pass 
+// the logic is simple => never make the window size smaller than the size of maxLen that we update 
+
+
+class Solution {
+public: 
+    int longestOnes(vector<int> &nums, int k) {
+        int n = nums.size();
+
+        int l = 0, r = 0, zeros = 0, res = 0;
+
+        while(r < n) {
+            // expand the window always to include nums[r]
+            if(nums[r] == 0) zeros++;
+
+            if(zeros > k) {
+                // the window has become invalid as we used more flips than allowed 
+                if(nums[l] == 0) zeros--;
+                l++;
+            }
+
+            // update the length only if the window is valid 
+            if(zeros <= k) res = max(res, r-l+1);
+        }
+
+        return res;
+    }
+};
