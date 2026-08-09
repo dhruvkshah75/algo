@@ -23,9 +23,9 @@ class Solution {
 private:
 	const int MOD = 1e9+7;
 	int row, col;
+	int dp[51][51][10];
 	vector<vector<int>> prefix;
-	vector<vector<vector<int>>> dp;
-
+	
 	int f(int r, int c, int cuts_left) {
 		// when all cuts are made then 1 way found 
 		if(cuts_left == 0) return 1;
@@ -70,8 +70,6 @@ public:
         prefix.resize(row+1, vector<int>(col+1, 0));
         // keep the prefix matrix as 1 based indexing 
 
-        dp.resize(row+1, vector<vector<int>>(col+1, vector<int>(k, -1)));
-
         for(int i = 1; i <= row; i++) {
         	for(int j = 1; j <= col; j++) {
         		prefix[i][j] = prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1] + ((pizza[i-1][j-1] == 'A') ? 1 : 0);
@@ -80,6 +78,8 @@ public:
 
         // base case check => no A is in entire section 
         if(prefix[row][col] == 0) return 0;
+
+        memset(dp, -1, sizeof(dp));
 
         // call the recurrence from the first cell (1 based) and starting with k-1 cuts 
         return f(1, 1, k-1);
